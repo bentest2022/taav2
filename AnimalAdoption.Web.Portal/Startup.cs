@@ -30,7 +30,7 @@ namespace AnimalAdoption.Web.Portal
 
             services.AddDbContext<AnimalAdoptionContext>(options =>
             {
-                options.UseSqlServer("Server=localhost;Initial Catalog= test_database;Integrated Security=true;Connection Timeout = 30;");
+                options.UseSqlServer("YOUR CONNECTION STRING GOES HERE");
             });
 
             services.AddHttpContextAccessor();
