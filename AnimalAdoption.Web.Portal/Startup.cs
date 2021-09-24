@@ -29,7 +29,7 @@ namespace AnimalAdoption.Web.Portal
         {
             services.Configure<Configuration>(Configuration);
 
-            var connectionString = "Your connection string goes here";
+            var connectionString = "Server=tcp:sprinttestsqlserver.database.windows.net,1433;Initial Catalog=test_database;Persist Security Info=False;User ID=sprintadmin;Password=7ATI4lXi#Z7c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
             services.AddDbContext<AnimalAdoptionContext>(options =>
             {
@@ -40,7 +40,6 @@ namespace AnimalAdoption.Web.Portal
             services.AddMemoryCache();
             services.AddTransient<CartService>();
             services.AddTransient<AnimalService>();
-            services.AddTransient<LoginService>();
             services.AddRazorPages();
         }
 
@@ -75,24 +74,6 @@ namespace AnimalAdoption.Web.Portal
                     {
                         throw new Exception($"A simulated failure occured - there is a {failurePercentage}% chance of this occuring");
                     }
-                });
-            }
-
-            var examplePassword = Configuration.GetValue<string>("GlobalPassword");
-            // This example connection string is used for testing that variables have been passed in correctly.
-
-            if (string.IsNullOrWhiteSpace(examplePassword))
-            {
-                app.Use(async (context, next) =>
-                {
-                    var url = context.Request.Path.Value;
-                    if (!url.ToLowerInvariant().Contains("/missingenvironmentvariable"))
-                    {
-                        // rewrite and continue processing
-                        context.Request.Path = "/missingenvironmentvariable";
-                    }
-
-                    await next();
                 });
             }
 

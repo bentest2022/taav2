@@ -31,24 +31,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Cart">Cart</a>
                         </li>
-                        @if (username == null)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Login" asp-route-redirectUrl="@request.Path">Login</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Logout</a>
-                            </li>
-                        }
                     </ul>
                 </div>
-                @if (username != null)
-                {
-                    <span>Welcome @username!</span>
-                }
             </div>
         </nav>
     </header>
