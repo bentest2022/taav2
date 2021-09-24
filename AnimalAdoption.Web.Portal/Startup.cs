@@ -3,6 +3,7 @@ using AnimalAdoption.Common.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,9 +29,11 @@ namespace AnimalAdoption.Web.Portal
         {
             services.Configure<Configuration>(Configuration);
 
+            var connectionString = "Your connection string goes here";
+
             services.AddDbContext<AnimalAdoptionContext>(options =>
             {
-                options.UseSqlServer("YOUR CONNECTION STRING GOES HERE");
+                options.UseSqlServer(connectionString);
             });
 
             services.AddHttpContextAccessor();
