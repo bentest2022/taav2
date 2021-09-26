@@ -2,6 +2,5 @@
 {
     public class Configuration
     {
-        public string GlobalPassword { get; set; }
     }
 }

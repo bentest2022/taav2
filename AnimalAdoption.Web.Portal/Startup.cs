@@ -23,17 +23,18 @@ namespace AnimalAdoption.Web.Portal
         }
 
         public IConfiguration Configuration { get; }
+        private string _connectionString;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<Configuration>(Configuration);
 
-            var connectionString = "Server=tcp:sprinttestsqlserver.database.windows.net,1433;Initial Catalog=test_database;Persist Security Info=False;User ID=sprintadmin;Password=7ATI4lXi#Z7c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            _connectionString = "YOUR CONNECTIONS STRING";
 
             services.AddDbContext<AnimalAdoptionContext>(options =>
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(_connectionString);
             });
 
             services.AddHttpContextAccessor();
@@ -74,6 +75,21 @@ namespace AnimalAdoption.Web.Portal
                     {
                         throw new Exception($"A simulated failure occured - there is a {failurePercentage}% chance of this occuring");
                     }
+                });
+            }
+
+            if (string.IsNullOrWhiteSpace(_connectionString))
+            {
+                app.Use(async (context, next) =>
+                {
+                    var url = context.Request.Path.Value;
+                    if (!url.ToLowerInvariant().Contains("/missingenvironmentvariable"))
+                    {
+                        // rewrite and continue processing
+                        context.Request.Path = "/missingenvironmentvariable";
+                    }
+
+                    await next();
                 });
             }
 
