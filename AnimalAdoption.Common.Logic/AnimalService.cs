@@ -18,7 +18,8 @@ namespace AnimalAdoption.Common.Logic
                 Id = x.Id,
                 Age = x.Age,
                 Description = x.Description,
-                Name = x.Name
+                Name = x.Name,
+                Owner = x.Owner
             })
             .ToArray();
         }

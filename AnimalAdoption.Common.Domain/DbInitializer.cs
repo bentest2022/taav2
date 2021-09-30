@@ -12,23 +12,26 @@ namespace AnimalAdoption.Common.Domain
         {
             context.Database.EnsureCreated();
 
-            if (context.Animals.Any())
+            if (!context.Owners.Any() && !context.Animals.Any())
             {
-                return; // DB has been seeded
-            }
+                var ownerOne = new Owner { Name = "Bob Smith", PhoneNumber = "021578526", Address = "34 Silverdale Road" };
+                context.Add(ownerOne);
 
-            var animalList = new Animal[] {
-                new Animal { Name = "Kaya", Age = 5, Description = "Funny, kind, friendly, adventurous, dreamer, impulsive, optimistic, caring, loyal, cool, graceful, fun-loving, heroic, sweet" },
-                new Animal { Name = "Khumba", Age = 2, Description = "Happy, determined, dicouraged, outcasted, kind, caring, smart, social, nice" },
-                new Animal { Name = "Marty", Age = 7, Description = "Funny, kind, friendly, adventurous, a dreamer, optimistic, impulsive, caring, loyal, humorous, cool, brainy, mischievous, obstinate, fun-loving, heroic" },
-            };
+                var ownerTwo = new Owner { Name = "Wayne Johnson", PhoneNumber = "027859645", Address = "158 Hamilton Road" };
+                context.Add(ownerTwo);
 
-            foreach (var a in animalList)
-            {
-                context.Animals.Add(a);
+                var ownerThree = new Owner { Name = "Jane Doe", PhoneNumber = "0214570876", Address = "2A River Road" };
+                context.Add(ownerThree);
+
+                var animalList = new Animal[] {
+                    new Animal { Name = "Lucy", Age = 1, Description = "Golden retriever. Female", Owner = ownerOne },
+                    new Animal { Name = "Gizmo", Age = 4, Description = "Pug. Male" , Owner = ownerTwo },
+                    new Animal { Name = "Freddy", Age = 7, Description = "German Shepard. Male", Owner = ownerThree},
+                };
+
+                context.AddRange(animalList);
+                context.SaveChanges();
             }
-            //context.AddRange(animalList);
-            context.SaveChanges();
         }
     }
 }

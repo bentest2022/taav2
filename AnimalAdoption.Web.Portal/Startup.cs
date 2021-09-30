@@ -39,7 +39,6 @@ namespace AnimalAdoption.Web.Portal
 
             services.AddHttpContextAccessor();
             services.AddMemoryCache();
-            services.AddTransient<CartService>();
             services.AddTransient<AnimalService>();
             services.AddRazorPages();
         }
@@ -73,7 +72,7 @@ namespace AnimalAdoption.Web.Portal
                     }
                     else
                     {
-                        throw new Exception($"A simulated failure occured - there is a {failurePercentage}% chance of this occuring");
+                        throw new Exception($"A simulated failure occurred - there is a {failurePercentage}% chance of this occurring");
                     }
                 });
             }
@@ -100,6 +99,7 @@ namespace AnimalAdoption.Web.Portal
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

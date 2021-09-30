@@ -15,10 +15,16 @@ namespace AnimalAdoption.Common.Domain
 
         public DbSet<Animal> Animals { get; set; }
 
+        public DbSet<Owner> Owners { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Entity<Animal>()
+                .HasKey(x => x.Id);
+
+            modelBuilder
+                .Entity<Owner>()
                 .HasKey(x => x.Id);
         }
     }

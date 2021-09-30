@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalAdoption.Web.Portal", "AnimalAdoption.Web.Portal\AnimalAdoption.Web.Portal.csproj", "{58DB617C-3059-46A1-A974-1BF3D7C0FB07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimalAdoption.Web.Portal", "AnimalAdoption.Web.Portal\AnimalAdoption.Web.Portal.csproj", "{58DB617C-3059-46A1-A974-1BF3D7C0FB07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalAdoption.Common.Logic", "AnimalAdoption.Common.Logic\AnimalAdoption.Common.Logic.csproj", "{B3F80AF6-F44A-4D85-9BA9-DF57EFD4C58D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimalAdoption.Common.Logic", "AnimalAdoption.Common.Logic\AnimalAdoption.Common.Logic.csproj", "{B3F80AF6-F44A-4D85-9BA9-DF57EFD4C58D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalAdoption.Web.Portal.UnitTests", "AnimalAdoption.Web.Portal.UnitTests\AnimalAdoption.Web.Portal.UnitTests.csproj", "{E6CA8578-39B8-4B33-AB27-2D3A04FDA1BF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalAdoption.Common.Domain", "AnimalAdoption.Common.Domain\AnimalAdoption.Common.Domain.csproj", "{20900EAC-5226-472E-A932-CA260678433F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimalAdoption.Common.Domain", "AnimalAdoption.Common.Domain\AnimalAdoption.Common.Domain.csproj", "{20900EAC-5226-472E-A932-CA260678433F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{B3F80AF6-F44A-4D85-9BA9-DF57EFD4C58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3F80AF6-F44A-4D85-9BA9-DF57EFD4C58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3F80AF6-F44A-4D85-9BA9-DF57EFD4C58D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6CA8578-39B8-4B33-AB27-2D3A04FDA1BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6CA8578-39B8-4B33-AB27-2D3A04FDA1BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6CA8578-39B8-4B33-AB27-2D3A04FDA1BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6CA8578-39B8-4B33-AB27-2D3A04FDA1BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{20900EAC-5226-472E-A932-CA260678433F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{20900EAC-5226-472E-A932-CA260678433F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20900EAC-5226-472E-A932-CA260678433F}.Release|Any CPU.ActiveCfg = Release|Any CPU
