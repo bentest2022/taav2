@@ -1,0 +1,68 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      
+    - name: Restore dependencies
+      run: dotnet restore
+  
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Publish portal project to Release
+      run: dotnet publish ${{ github.workspace }}/AnimalAdoption.Web.Portal/AnimalAdoption.Web.Portal.csproj --configuration Release --no-build --output ./taa-portal
+      
+    - name: Upload a build artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: drop
+        path: ${{ github.workspace }}/taa-portal
+        if-no-files-found: error
+        
+  release-to-azure:
+    
+    runs-on: ubuntu-latest
+    
+    needs: [ build ]
+    
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    env:
+      WEB_APP_NAME: app-azure-sprint-devsecops-12
+    
+    steps:
+    - name: Download build artifact
+      uses: actions/download-artifact@v2.0.5
+      with:
+        name: drop
+        path: ./taa-portal
+        
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.SERVICE_PRINCIPAL}}
+        
+    - name: Azure Webapp deploy
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: ${{env.WEB_APP_NAME}}
+        package: ./taa-portal
+
