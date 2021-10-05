@@ -26,16 +26,11 @@ namespace AnimalAdoption.Web.Portal
     private string _connectionString;
 
     // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
+    public void ConfigureServices(IServiceCollection services)
     {
       services.Configure<Configuration>(Configuration);
 
       _connectionString = Configuration["SqlConnectionString"];
-
-      if (string.IsNullOrEmpty(_connectionString) && env.IsDevelopment())
-      {
-        throw new Exception("Please make sure that you have set a SQL DB connection string...");
-      }
 
       services.AddDbContext<AnimalAdoptionContext>(options =>
       {
@@ -53,6 +48,12 @@ namespace AnimalAdoption.Web.Portal
     {
       if (env.IsDevelopment())
       {
+        //
+        if (string.IsNullOrEmpty(_connectionString))
+        {
+          throw new Exception("Please make sure that you have set a SQL DB connection string...");
+        }
+
         app.UseDeveloperExceptionPage();
       }
       else
