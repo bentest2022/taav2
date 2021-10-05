@@ -30,7 +30,7 @@ namespace AnimalAdoption.Web.Portal
     {
       services.Configure<Configuration>(Configuration);
 
-      _connectionString = ""; //SET YOUR SQL DB CONNECTION STRING HERE
+      _connectionString = Configuration["SqlConnectionString"];
 
       if (string.IsNullOrEmpty(_connectionString))
       {
