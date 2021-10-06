@@ -59,7 +59,21 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.SERVICE_PRINCIPAL}}
-        
+    
+    - name: Azure App Service Settings
+      uses: Azure/appservice-settings@v1
+      with:
+        # Name of the Azure Web App
+        app-name: ${{env.WEB_APP_NAME}}
+        # Name of an existing slot other than the production slot. Default value is production
+        app-settings-json: |
+          [
+              {
+                  "name": "SqlConndectionString",
+                  "value": "${{ secrets.SQL_CONNECTION_STRING }}",
+                  "slotSetting": false
+              }
+          ]
     - name: Azure Webapp deploy
       uses: Azure/webapps-deploy@v2
       with:
