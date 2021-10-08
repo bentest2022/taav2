@@ -70,7 +70,7 @@ jobs:
           [
               {
                   "name": "SqlConndectionString",
-                  "value": "${{ secrets.SQL_CONNECTION_STRING }}",
+                  "value": "@Microsoft.KeyVault(VaultName=ben-devsecops;SecretName=SqlDbConnection)",
                   "slotSetting": false
               }
           ]
