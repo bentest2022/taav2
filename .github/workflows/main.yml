@@ -69,7 +69,7 @@ jobs:
         app-settings-json: |
           [
               {
-                  "name": "SqlConndectionString",
+                  "name": "SqlConnectionString",
                   "value": "@Microsoft.KeyVault(VaultName=ben-devsecops;SecretName=SqlDbConnection)",
                   "slotSetting": false
               }
