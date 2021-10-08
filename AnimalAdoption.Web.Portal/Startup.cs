@@ -12,6 +12,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Identity.Web.UI;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Mvc.Authorization;
+
+sing Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace AnimalAdoption.Web.Portal
 {
@@ -28,6 +36,17 @@ namespace AnimalAdoption.Web.Portal
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+        .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
+
+      services.AddControllersWithViews(options =>
+           {
+             var policy = new AuthorizationPolicyBuilder()
+            .RequireAuthenticatedUser()
+            .Build();
+             options.Filters.Add(new AuthorizeFilter(policy));
+           });
+
       services.Configure<Configuration>(Configuration);
 
       _connectionString = Configuration["SqlConnectionString"];
@@ -40,7 +59,8 @@ namespace AnimalAdoption.Web.Portal
       services.AddHttpContextAccessor();
       services.AddMemoryCache();
       services.AddTransient<AnimalService>();
-      services.AddRazorPages();
+      services.AddRazorPages()
+        .AddMicrosoftIdentityUI();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,10 +69,10 @@ namespace AnimalAdoption.Web.Portal
       if (env.IsDevelopment())
       {
         //
-        if (string.IsNullOrEmpty(_connectionString))
-        {
-          throw new Exception("Please make sure that you have set a SQL DB connection string...");
-        }
+        // if (string.IsNullOrEmpty(_connectionString))
+        // {
+        //   throw new Exception("Please make sure that you have set a SQL DB connection string...");
+        // }
 
         app.UseDeveloperExceptionPage();
       }
@@ -100,7 +120,9 @@ namespace AnimalAdoption.Web.Portal
 
       app.UseRouting();
 
+      app.UseAuthentication();
       app.UseAuthorization();
+
 
       app.UseEndpoints(endpoints =>
       {

@@ -8,24 +8,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace AnimalAdoption.Web.Portal.Pages
 {
-    public class IndexModel : PageModel
+  public class IndexModel : PageModel
+  {
+    private readonly ILogger<IndexModel> _logger;
+
+    [BindProperty]
+    public IEnumerable<Animal> Animals { get; set; }
+
+    public IndexModel(ILogger<IndexModel> logger, AnimalService animalData)
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        [BindProperty]
-        public IEnumerable<Animal> Animals { get; set; }
-
-        public IndexModel(ILogger<IndexModel> logger, AnimalService animalData)
-        {
-            _logger = logger;
-            Animals = animalData.ListAnimals();
-        }
-
-        public void OnGet()
-        {
-
-        }
+      _logger = logger;
+      Animals = animalData.ListAnimals();
     }
+
+    public void OnGet()
+    {
+
+    }
+  }
 }
