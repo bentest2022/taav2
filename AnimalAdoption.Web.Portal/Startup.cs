@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Mvc.Authorization;
 
-sing Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace AnimalAdoption.Web.Portal
 {
