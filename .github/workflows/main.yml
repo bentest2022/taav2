@@ -46,7 +46,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     env:
-      WEB_APP_NAME: app-azure-sprint-devsecops-12
+      WEB_APP_NAME: app-azure-sprint-devsecops-1
     
     steps:
     - name: Download build artifact
@@ -58,22 +58,9 @@ jobs:
     - name: Azure login
       uses: azure/login@v1
       with:
-        creds: ${{secrets.SERVICE_PRINCIPAL}}
+        creds: ${{secrets.AZURE_CREDENTIALS }}
     
-    - name: Azure App Service Settings
-      uses: Azure/appservice-settings@v1
-      with:
-        # Name of the Azure Web App
-        app-name: ${{env.WEB_APP_NAME}}
-        # Name of an existing slot other than the production slot. Default value is production
-        app-settings-json: |
-          [
-              {
-                  "name": "SqlConnectionString",
-                  "value": "@Microsoft.KeyVault(VaultName=ben-devsecops;SecretName=SqlDbConnection)",
-                  "slotSetting": false
-              }
-          ]
+    
     - name: Azure Webapp deploy
       uses: Azure/webapps-deploy@v2
       with:
